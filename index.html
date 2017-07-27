@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Match</title>
+    <link href="https://fonts.googleapis.com/css?family=Trade+Winds" rel="stylesheet">
+    <style>
+        body {
+            background-image: url(images/my_gears.png);
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Trade Winds', cursive;
+            color: white;
+        }
+
+        .stat-bar, .instruction-bar {
+            background-color: rgba(0, 0, 0, .5);
+            border-radius: 5px;
+            color: white;
+            font-family: 'Trade Winds', cursive;
+            position: absolute;
+            width: 164px;
+            padding: 0 20px;
+            top: 20px;
+        }
+
+        .stat-bar {
+            float: left;
+            left: 20px;
+        }
+
+        .instruction-bar {
+            float: right;
+            right: 20px;
+        }
+
+        .game-area {
+            text-align: center;
+            position: relative;
+            min-width: 700px;
+        }
+
+        .row-2, .row-3, .row-4 {
+            margin: -38px 0;
+            display: block;
+        }
+
+        .card {
+            position: relative;
+            display: inline-block;
+        }
+
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+
+        .hexagon {
+            height: 150px;
+            width: 150px;
+            margin: 0 -10px;
+        }
+
+        .deg-0 {
+            transform: rotate(0deg);
+        }
+        .deg-60 {
+            transform: rotate(60deg);
+        }
+        .deg-120 {
+            transform: rotate(120deg);
+        }
+        .deg-180 {
+            transform: rotate(180deg);
+        }
+        .deg-240 {
+            transform: rotate(240deg);
+        }
+        .deg-300 {
+            transform: rotate(300deg);
+        }
+        .deg-360 {
+            transform: rotate(360deg);
+        }
+
+        .clockwise-icon > img, .counterclockwise-icon > img {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            z-index: 1;
+            top: 50px;
+            display: none;
+        }
+
+        .counterclockwise-icon > img {
+            left: 10px;
+        }
+
+        .clockwise-icon > img {
+            right: 10px;
+        }
+
+
+        @media screen and (max-width: 1180px) {
+            .stat-bar, .instruction-bar {
+                float: none;
+                border-radius: 0;
+                width: 100vw;
+                position: static;
+                margin-top: 50px;
+                padding: 5px 0;
+            }
+
+            .stat-bar {
+                margin: 0px;
+            }
+
+            .stat-bar > div {
+                display: inline-block;
+                width: 25vw;
+            }
+
+            .stat-bar h2 {
+                display: none;
+            }
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+        var matches = 0;
+        var guesses = 0;
+        var first_card_flipped = null;
+        var second_card_flipped = null;
+
+        function updateStats() {
+            guesses++;
+            $('.display_matches').html(matches);
+            $('.display_guesses').html(guesses);
+            if (matches > 0) {
+                $('.display_accuracy').html(Math.floor(matches / guesses * 100) + "%");
+            };
+            if (matches >= 9) {
+                console.log('You win!');
+            };
+        }
+
+        function rotate_hex_clockwise(selected_card) {
+            selected_card.css('transition','1s');
+            if (selected_card.hasClass('deg-60')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-120').removeClass('deg-60');
+            }
+            else if (selected_card.hasClass('deg-120')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-180').removeClass('deg-120');
+            }
+            else if (selected_card.hasClass('deg-180')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-240').removeClass('deg-180');
+            }
+            else if (selected_card.hasClass('deg-240')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-300').removeClass('deg-240');
+            }
+            else if (selected_card.hasClass('deg-300')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-360').removeClass('deg-300');
+            }
+            setTimeout(function(){selected_card.css('transition','0s')},1000);
+        }
+
+        function rotate_hex_counterclockwise(selected_card) {
+            selected_card.css('transition','1s');
+            if (selected_card.hasClass('deg-60')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-0').removeClass('deg-60');
+            }
+            else if (selected_card.hasClass('deg-120')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-60').removeClass('deg-120');
+            }
+            else if (selected_card.hasClass('deg-180')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-120').removeClass('deg-180');
+            }
+            else if (selected_card.hasClass('deg-240')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-180').removeClass('deg-240');
+            }
+            else if (selected_card.hasClass('deg-300')) {
+                console.log('I am clicked');
+                selected_card.addClass('deg-240').removeClass('deg-300');
+            }
+            setTimeout(function(){selected_card.css('transition','0s');},1000);
+        }
+
+        function reset_rotate(selected_card) {
+            if (selected_card.hasClass('deg-360') || selected_card.hasClass('deg-0')) {
+                console.log('tile reset');
+                selected_card.addClass('deg-180').removeClass('deg-360').removeClass('deg-0');
+            }
+        }
+
+        function reset_flipped_variables() {
+            first_card_flipped = null;
+            second_card_flipped = null;
+        }
+
+        function show_rotators() {
+            $(".card:not(.locked)").find('.clockwise-icon > img').css("display", "inline-block");
+            $(".card:not(.locked)").find('.counterclockwise-icon > img').css("display", "inline-block");
+        }
+
+        function choose_rotate() {
+            var notClicked = true;
+            $('.clockwise-icon > img').click(function() {
+                if (notClicked) {
+                    notClicked = false;
+                    var currentHexFront = $(this).parent().parent().find('.front img');
+                    var currentHexBack = $(this).parent().parent().find('.back img');
+                    console.log('Rotator has been clicked');
+                    $('.clockwise-icon > img').css("display", "none");
+                    $('.counterclockwise-icon > img').css("display", "none");
+                    rotate_hex_clockwise(currentHexFront);
+                    rotate_hex_clockwise(currentHexBack);
+                    setTimeout(function() {
+                        reset_rotate(currentHexFront);
+                        reset_rotate(currentHexBack);
+                        reset_flipped_variables();
+                        notClicked = true;
+                    }, 1000);
+                }
+            });
+            $('.counterclockwise-icon > img').click(function() {
+                if (notClicked) {
+                    notClicked = false;
+                    var currentHexFront = $(this).parent().parent().find('.front img');
+                    var currentHexBack = $(this).parent().parent().find('.back img');
+                    console.log('Rotator has been clicked');
+                    $('.clockwise-icon > img').css("display", "none");
+                    $('.counterclockwise-icon > img').css("display", "none");
+                    rotate_hex_counterclockwise(currentHexFront);
+                    rotate_hex_counterclockwise(currentHexBack);
+                    setTimeout(function() {
+                        reset_rotate(currentHexFront);
+                        reset_rotate(currentHexBack);
+                        reset_flipped_variables();
+                        notClicked = true;
+                    }, 1000);
+                }
+            });
+        }
+
+        function no_match() {
+            $(first_card_flipped).find('.back img').removeClass('hidden');
+            $(first_card_flipped).removeClass('locked');
+            $(second_card_flipped).find('.back img').removeClass('hidden');
+            $(second_card_flipped).removeClass('locked');
+            rotate_hex_clockwise($(second_card_flipped).find('.back img'));
+            rotate_hex_clockwise($(second_card_flipped).find('.front img'));
+            rotate_hex_counterclockwise($(first_card_flipped).find('.back img'));
+            rotate_hex_counterclockwise($(first_card_flipped).find('.front img'));
+            setTimeout(function() {
+                reset_rotate($(second_card_flipped).find('img'));
+                reset_rotate($(first_card_flipped).find('img'));
+                reset_flipped_variables();
+            }, 1000);
+        }
+
+        function flip_hex() {
+            $('.card').click(function () {
+                if ($(this).hasClass('locked')) {
+                    console.log('This tile is locked');
+                    return;
+                } else if (second_card_flipped !== null) {
+                    console.log('Please rotate a tile first');
+                    return;
+                };
+                $(this).find('.back img').css('transition','1s');
+                console.log('first hex flipped');
+                $(this).find(".back > img").addClass('hidden');
+                $(this).addClass('locked');
+                if (first_card_flipped === null) {
+                    first_card_flipped = this;
+                    console.log($(first_card_flipped).find('.front img').attr('src'));
+                }
+                else {
+                    if ($(first_card_flipped).find('.front img').attr('src') === $(this).find('.front img').attr('src')) {
+                        second_card_flipped = this;
+                        if (($(first_card_flipped).find('.front img').hasClass('deg-180') && $(second_card_flipped).find('.front img').hasClass('deg-180')) ||
+                            ($(first_card_flipped).find('.front img').hasClass('deg-60') && $(second_card_flipped).find('.front img').hasClass('deg-60')) ||
+                            ($(first_card_flipped).find('.front img').hasClass('deg-60') && $(second_card_flipped).find('.front img').hasClass('deg-240')) ||
+                            ($(first_card_flipped).find('.front img').hasClass('deg-120') && $(second_card_flipped).find('.front img').hasClass('deg-120')) ||
+                            ($(first_card_flipped).find('.front img').hasClass('deg-120') && $(second_card_flipped).find('.front img').hasClass('deg-300')) ||
+                            ($(first_card_flipped).find('.front img').hasClass('deg-240') && $(second_card_flipped).find('.front img').hasClass('deg-240')) ||
+                            ($(first_card_flipped).find('.front img').hasClass('deg-240') && $(second_card_flipped).find('.front img').hasClass('deg-60')) ||
+                            ($(first_card_flipped).find('.front img').hasClass('deg-300') && $(second_card_flipped).find('.front img').hasClass('deg-300')) ||
+                            ($(first_card_flipped).find('.front img').hasClass('deg-300') && $(second_card_flipped).find('.front img').hasClass('deg-120'))
+                        ) {
+                            console.log("They match orientation");
+                            matches++;
+                            updateStats();
+                            show_rotators();
+                        } else {
+                            console.log("They don't match in orientation");
+                            updateStats();
+                            setTimeout(no_match, 800);
+
+                        }
+                    } else {
+                        second_card_flipped = this;
+                        updateStats();
+                        console.log("The images don't match");
+                        setTimeout(no_match, 800);
+                    }
+                }
+            });
+        }
+
+        $(document).ready(flip_hex);
+        $(document).ready(choose_rotate);
+
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>Inventor Matching Game</h1>
+    </div>
+    <div class="game-area">
+        <div class="row-1">
+            <div class="card" id="hex1-1">
+                <div class="front">
+                    <img src="images/pair1.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex1-2">
+                <div class="front">
+                    <img src="images/pair1.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex1-3">
+                <div class="front">
+                    <img src="images/pair2.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex1-4">
+                <div class="front">
+                    <img src="images/pair2.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+        </div>
+        <div class="row-2">
+            <div class="card" id="hex2-1">
+                <div class="front">
+                    <img src="images/pair3.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex2-2">
+                <div class="front">
+                    <img src="images/pair3.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex2-3">
+                <div class="front">
+                    <img src="images/pair4.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex2-4">
+                <div class="front">
+                    <img src="images/pair4.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex2-5">
+                <div class="front">
+                    <img src="images/pair5.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+        </div>
+        <div class="row-3">
+            <div class="card" id="hex3-1">
+                <div class="front">
+                    <img src="images/pair5.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex3-2">
+                <div class="front">
+                    <img src="images/pair6.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex3-3">
+                <div class="front">
+                    <img src="images/pair6.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex3-4">
+                <div class="front">
+                    <img src="images/pair7.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+        </div>
+        <div class="row-4">
+            <div class="card" id="hex4-1">
+                <div class="front">
+                    <img src="images/pair7.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex4-2">
+                <div class="front">
+                    <img src="images/pair8.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex4-3">
+                <div class="front">
+                    <img src="images/pair8.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex4-4">
+                <div class="front">
+                    <img src="images/pair9.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+            <div class="card" id="hex4-5">
+                <div class="front">
+                    <img src="images/pair9.png" class="hexagon deg-180"/>
+                </div>
+                <div class="back">
+                    <img src="images/card-back.png" class="hexagon deg-180"/>
+                </div>
+                <div class="clockwise-icon">
+                    <img src="images/clock.png">
+                </div>
+                <div class="counterclockwise-icon">
+                    <img src="images/counterclock.png">
+                </div>
+            </div>
+        </div>
+        <div class="instruction-bar">
+            <h2>Instructions:</h2>
+            <p>1. Match All 9 Pairs Of Inventors</p>
+            <p>2. You Must Match BOTH Images and Tile Orientation</p>
+            <p>3. You Can Rotate A Tile After A Successful Match</p>
+        </div>
+        <div class="stat-bar">
+            <h2>Stats</h2>
+            <div>
+                <p>Number of Matches:</p>
+                <p class="display_matches">0</p>
+            </div>
+            <div>
+                <p>Number of Guesses:</p>
+                <p class="display_guesses">0</p>
+            </div>
+            <div>
+                <p>Accuracy:</p>
+                <p class="display_accuracy">--</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
