@@ -1,0 +1,170 @@
+body {
+    background-image: url(images/my_gears.png);
+    margin: 0;
+}
+
+.header {
+    text-align: center;
+}
+
+.header > img {
+    margin: 25px;
+    width: 80vw;
+    max-width: 650px;
+}
+
+.stat-bar, .instruction-bar {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    color: white;
+    font-family: 'Trade Winds', cursive;
+    position: absolute;
+    width: 15vw;
+    padding: 0 20px;
+    top: 20px;
+}
+
+.stat-bar > p, .instruction-bar > p {
+    font-size: 14px;
+}
+
+.message_prompt > h2 {
+    font-family: "Trade Winds", cursive;
+    color: white;
+    margin: 50px 0 10px 0;
+    font-size: 32px;
+}
+
+.stat-bar {
+    float: left;
+    left: 3vw;
+}
+
+.stat-bar > button {
+    font-family: 'Trade Winds', cursive;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    margin-bottom: 32px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.instruction-bar {
+    float: right;
+    right: 3vw;
+    padding-bottom: 20px;
+}
+
+.game-area {
+    text-align: center;
+    position: relative;
+    min-width: 700px;
+    margin: 0;
+}
+
+.row-2, .row-3, .row-4 {
+    margin: -38px 0;
+    display: block;
+}
+
+.card {
+    position: relative;
+    display: inline-block;
+}
+
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.hexagon {
+    height: 150px;
+    width: 150px;
+    margin: 0 -10px;
+}
+
+.deg-0 {
+    transform: rotateZ(0deg);
+}
+.deg-60 {
+    transform: rotateZ(60deg);
+}
+.deg-120 {
+    transform: rotateZ(120deg);
+}
+.deg-180 {
+    transform: rotateZ(180deg);
+}
+.deg-240 {
+    transform: rotateZ(240deg);
+}
+.deg-300 {
+    transform: rotateZ(300deg);
+}
+.deg-360 {
+    transform: rotateZ(360deg);
+}
+
+.clockwise-icon > img, .counterclockwise-icon > img {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    z-index: 1;
+    top: 35px;
+    display: none;
+}
+
+.counterclockwise-icon > img {
+    left: 5px;
+}
+
+.clockwise-icon > img {
+    right: 5px;
+}
+
+.no-rotate-button > img {
+    display: none;
+    position: absolute;
+    width: 130px;
+    bottom: 0;
+    left: 0;
+}
+
+@media screen and (max-width: 1180px) {
+    .stat-bar, .instruction-bar {
+        float: none;
+        border-radius: 0;
+        width: 46vw;
+        position: static;
+        padding: 5px 0;
+        display: inline-block;
+        vertical-align: top;
+        background-color: rgba(0, 0, 0, .0);
+    }
+
+    .information {
+        display: block;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, .5);
+    }
+
+    .stat-bar {
+        margin: 0;
+        width: 46vw;
+    }
+
+    .stat-bar > div {
+        display: inline-block;
+        width: 14vw;
+    }
+
+    .stat-bar h2, .instruction-bar h2 {
+        display: none;
+    }
+}
