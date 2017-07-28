@@ -365,8 +365,10 @@
             rotate_hex_counterclockwise($(second_card_flipped).find('.back img'));
             rotate_hex_counterclockwise($(second_card_flipped).find('.front img'));
             setTimeout(function() {
-                reset_rotate($(second_card_flipped).find('img'));
-                reset_rotate($(first_card_flipped).find('img'));
+                reset_rotate($(second_card_flipped).find('.back img'));
+                reset_rotate($(second_card_flipped).find('.front img'));
+                reset_rotate($(first_card_flipped).find('.back img'));
+                reset_rotate($(first_card_flipped).find('.front img'));
                 reset_flipped_variables();
             }, 1000);
         }
