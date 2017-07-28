@@ -154,6 +154,14 @@ body {
         background-color: rgba(0, 0, 0, .5);
     }
 
+    #games-played > * {
+        display: none;
+    }
+
+    #games-played {
+        display: none;
+    }
+
     .stat-bar {
         margin: 0;
         width: 46vw;

@@ -4,11 +4,10 @@
 
 var matches = 0;
 var guesses = 0;
+var games_played = 0;
 var first_card_flipped = null;
 var second_card_flipped = null;
 
-//        var bg_images = ['photo1.jpg', 'photo2.jpg', 'photo4.jpg'];
-//
 function randomize_cards() {
     var cards = ['pair1.png', 'pair1.png', 'pair2.png', 'pair2.png', 'pair3.png', 'pair3.png', 'pair4.png', 'pair4.png', 'pair5.png', 'pair5.png', 'pair6.png', 'pair6.png', 'pair7.png', 'pair7.png', 'pair8.png', 'pair8.png', 'pair9.png', 'pair9.png'];
     var randomCards = [];
@@ -30,8 +29,10 @@ function restart_game() {
         $('.message_prompt > h2').text('-Choose A Hex To Reveal-');
         matches = 0;
         guesses = 0;
+        games_played += 1;
         $('.display_matches').html(matches);
         $('.display_guesses').html(guesses);
+        $('.display_games_played').html(games_played);
         $('.display_accuracy').html("--");
         $('.clockwise-icon > img').css("display", "none");
         $('.counterclockwise-icon > img').css("display", "none");
