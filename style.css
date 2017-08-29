@@ -26,6 +26,11 @@ body {
 
 .stat-bar > p, .instruction-bar > p {
     font-size: 14px;
+    margin: 0;
+}
+
+.instruction-bar > h2 {
+    margin: 0;
 }
 
 .message_prompt > h2 {
@@ -53,7 +58,10 @@ body {
 .instruction-bar {
     float: right;
     right: 3vw;
-    padding-bottom: 20px;
+    height: 456.812px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
 }
 
 .game-area {
