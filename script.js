@@ -19,7 +19,7 @@ function randomize_cards() {
     for (var j = 0; j < randomCards.length; j++) {
         $('#hex' + j).attr('src','images/' + randomCards[j]);
     }
-    console.log(randomCards);
+    // console.log(randomCards);
 }
 
 function restart_game() {
@@ -101,7 +101,7 @@ function rotate_hex_counterclockwise(selected_card) {
 
 function reset_rotate(selected_card) {
     if (selected_card.hasClass('deg-360') || selected_card.hasClass('deg-0')) {
-        console.log('tile reset');
+        // console.log('tile reset');
         selected_card.addClass('deg-180').removeClass('deg-360').removeClass('deg-0');
     }
 }
@@ -124,7 +124,7 @@ function choose_rotate() {
             notClicked = false;
             var currentHexFront = $(this).parent().parent().find('.front img');
             var currentHexBack = $(this).parent().parent().find('.back img');
-            console.log('Rotator has been clicked');
+            // console.log('Rotator has been clicked');
             $('.clockwise-icon > img').css("display", "none");
             $('.counterclockwise-icon > img').css("display", "none");
             $('.no-rotate-button > img').css("display","none");
@@ -188,10 +188,10 @@ function no_match() {
 function flip_hex() {
     $('.card').click(function () {
         if ($(this).hasClass('locked')) {
-            console.log('This tile is locked');
+            // console.log('This tile is locked');
             return;
         } else if (second_card_flipped !== null) {
-            console.log('Please rotate a tile first');
+            // console.log('Please rotate a tile first');
             return;
         }
         $(this).find('.back img').css('transition','1s');
