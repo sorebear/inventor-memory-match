@@ -22,11 +22,12 @@ function randomize_cards() {
     // console.log(randomCards);
 }
 
-function restart_game() {
+function restart_game(e) {
     $('.stat-bar button').click(function(){
         $('.card').addClass('locked');
         $('.card .back img').removeClass('hidden');
         $('.message_prompt > h2').text('-Choose A Hex To Reveal-');
+        animateDisplayMessage(e);
         matches = 0;
         guesses = 0;
         games_played += 1;
@@ -56,6 +57,7 @@ function updateStats() {
     if (matches >= 9) {
         $('.no-rotate-button > img').css("display","none");
         $('.message_prompt > h2').text('-YOU WIN!-');
+        animateDisplayMessage();
     }
 }
 
@@ -115,6 +117,7 @@ function show_rotators() {
     $(".card:not(.locked)").find('.clockwise-icon > img, .counterclockwise-icon > img').css("display", "inline-block");
     $(".no-rotate-button > img").css("display", "block");
     $(".message_prompt > h2").text("-Choose A Hex To Rotate-");
+    animateDisplayMessage();
 }
 
 function choose_rotate() {
@@ -135,6 +138,7 @@ function choose_rotate() {
                 reset_rotate(currentHexBack);
                 reset_flipped_variables();
                 $('.message_prompt > h2').text('-Choose A Hex To Reveal-');
+                animateDisplayMessage();
                 notClicked = true;
             }, 1000);
         }
@@ -154,6 +158,7 @@ function choose_rotate() {
                 reset_rotate(currentHexBack);
                 reset_flipped_variables();
                 $('.message_prompt > h2').text('-Choose A Hex To Reveal-');
+                animateDisplayMessage();
                 notClicked = true;
             }, 1000);
         }
@@ -163,6 +168,7 @@ function choose_rotate() {
         $('.counterclockwise-icon > img').css("display", "none");
         $('.no-rotate-button > img').css("display","none");
         $('.message_prompt > h2').text('-Choose A Hex To Reveal-');
+        animateDisplayMessage();
         setTimeout(reset_flipped_variables, 100);
     });
 }
@@ -200,6 +206,7 @@ function flip_hex() {
         if (first_card_flipped === null) {
             first_card_flipped = this;
             $(".message_prompt > h2").text("-Choose A Second Hex To Reveal-");
+            animateDisplayMessage();
         }
         else {
             if ($(first_card_flipped).find('.front img').attr('src') === $(this).find('.front img').attr('src')) {
@@ -221,6 +228,7 @@ function flip_hex() {
                     }
                 } else {
                     $('.message_prompt > h2').text('-The Orientations Do Not Match-');
+                    animateDisplayMessage();
                     updateStats();
                     setTimeout(no_match, 800);
                 }
@@ -228,10 +236,21 @@ function flip_hex() {
                 second_card_flipped = this;
                 updateStats();
                 $('.message_prompt > h2').text('-The Inventors Do Not Match-');
+                animateDisplayMessage();
                 setTimeout(no_match, 800);
             }
         }
     });
+}
+
+function animateDisplayMessage() {
+    setTimeout(function() {
+        $('.message_prompt > h2').addClass('highlightAnimation');
+    }, 100);
+
+    setTimeout(function() {
+        $('.message_prompt > h2').removeClass('highlightAnimation');
+    }, 400);
 }
 
 $(document).ready(function(){
