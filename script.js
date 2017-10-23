@@ -1,13 +1,10 @@
-/**
- * Created by sorenbaird on 7/28/17.
- */
-
 var matches = 0;
 var guesses = 0;
 var games_played = 0;
 var first_card_flipped = null;
 var second_card_flipped = null;
 
+//Function to Shuffle Hex Cards Upon Init and Game Reset
 function randomize_cards() {
     var cards = ['pair1.png', 'pair1.png', 'pair2.png', 'pair2.png', 'pair3.png', 'pair3.png', 'pair4.png', 'pair4.png', 'pair5.png', 'pair5.png', 'pair6.png', 'pair6.png', 'pair7.png', 'pair7.png', 'pair8.png', 'pair8.png', 'pair9.png', 'pair9.png'];
     var randomCards = [];
@@ -19,9 +16,9 @@ function randomize_cards() {
     for (var j = 0; j < randomCards.length; j++) {
         $('#hex' + j).attr('src','images/' + randomCards[j]);
     }
-    // console.log(randomCards);
 }
 
+//Function to Reset the Game
 function restart_game(e) {
     $('.stat-bar button').click(function(){
         $('.card').addClass('locked');
@@ -47,6 +44,7 @@ function restart_game(e) {
     });
 }
 
+//This function fired after every guess to update stats and check if win conditions are met
 function updateStats() {
     guesses++;
     $('.display_matches').html(matches);
@@ -61,6 +59,7 @@ function updateStats() {
     }
 }
 
+//This function removes the current rotation class and adds the next rotation class moving clockwise
 function rotate_hex_clockwise(selected_card) {
     selected_card.css('transition','1s');
     if (selected_card.hasClass('deg-60')) {
@@ -81,6 +80,7 @@ function rotate_hex_clockwise(selected_card) {
     setTimeout(function(){selected_card.css('transition','0s')},1000);
 }
 
+//This function removes the current rotation class and adds the next rotation class moving counter-clockwise
 function rotate_hex_counterclockwise(selected_card) {
     selected_card.css('transition','1s');
     if (selected_card.hasClass('deg-60')) {
@@ -101,6 +101,7 @@ function rotate_hex_counterclockwise(selected_card) {
     setTimeout(function(){selected_card.css('transition','0s');},1000);
 }
 
+//This function resets the rotation from 360 or 0 to 180. This helps manage infite rotation in one direction
 function reset_rotate(selected_card) {
     if (selected_card.hasClass('deg-360') || selected_card.hasClass('deg-0')) {
         // console.log('tile reset');
@@ -108,11 +109,14 @@ function reset_rotate(selected_card) {
     }
 }
 
+//When the two cards from a guess do not match, they will flip back over
 function reset_flipped_variables() {
     first_card_flipped = null;
     second_card_flipped = null;
 }
 
+//When a user makes a successful match, they have the choice of rotating a remaining card
+//This function displays the buttons for rotating on all remaining cards
 function show_rotators() {
     $(".card:not(.locked)").find('.clockwise-icon > img, .counterclockwise-icon > img').css("display", "inline-block");
     $(".no-rotate-button > img").css("display", "block");
@@ -120,6 +124,7 @@ function show_rotators() {
     animateDisplayMessage();
 }
 
+//This function handles rotating the hex card of the player's choosing, then hides all of the rotation buttons
 function choose_rotate() {
     var notClicked = true;
     $('.clockwise-icon > img').click(function() {
@@ -173,6 +178,7 @@ function choose_rotate() {
     });
 }
 
+//When a player does not get a match, the card hex is flipped back and is rotated
 function no_match() {
     $(first_card_flipped).find('.back img').removeClass('hidden');
     $(first_card_flipped).removeClass('locked');
@@ -191,6 +197,8 @@ function no_match() {
     }, 1000);
 }
 
+//A function that fires whenever the user clicks on a hex card
+//If it's the second card flipped it then evaluated if it is a match in picture and orientation
 function flip_hex() {
     $('.card').click(function () {
         if ($(this).hasClass('locked')) {
@@ -243,6 +251,7 @@ function flip_hex() {
     });
 }
 
+//This function adds a subtle animation whenever the bottom display message is changed
 function animateDisplayMessage() {
     setTimeout(function() {
         $('.message_prompt > h2').addClass('highlightAnimation');
@@ -253,6 +262,7 @@ function animateDisplayMessage() {
     }, 400);
 }
 
+//The Document Ready function to assign all event listeners and run the initial randomize cards function
 $(document).ready(function(){
     flip_hex();
     choose_rotate();
