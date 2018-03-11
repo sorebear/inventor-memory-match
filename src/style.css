@@ -167,8 +167,7 @@ body {
 .clockwise-icon > img,
 .counterclockwise-icon > img {
   position: absolute;
-  width: 45px;
-  height: 45px;
+  width: 35%;
   z-index: 1;
   top: 35px;
   display: none;
@@ -185,7 +184,7 @@ body {
 .no-rotate-button > img {
   display: none;
   position: absolute;
-  width: 130px;
+  width: 100%;
   bottom: 0;
   left: 0;
 }
@@ -283,5 +282,11 @@ body {
 
   .message_prompt > h2 {
     font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .message_prompt > h2 {
+    font-size: 14px;
   }
 }
