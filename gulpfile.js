@@ -10,12 +10,6 @@ const del = require('del');
 const DIST_PATH = 'dist';
 const SCRIPTS_PATH = 'src/**/*.js';
 const CSS_PATH = 'src/**/*.css';
-const IMAGES_PATH = 'src/images/**/*.{png,jpeg,jpg,svg,gif}';
-
-// Image Compression
-const imagemin = require('gulp-imagemin');
-const imageminPngquant = require('imagemin-pngquant');
-const imageminJpegRecompress = require('imagemin-jpeg-recompress');
 
 // CSS Styles
 gulp.task('styles', () => (
@@ -41,26 +35,12 @@ gulp.task('scripts', () => (
     .pipe(gulp.dest(DIST_PATH))
 ));
 
-// Images
-gulp.task('images', () => (
-  gulp
-    .src(IMAGES_PATH)
-    .pipe(imagemin([
-      imagemin.gifsicle(),
-      imagemin.jpegtran(),
-      imagemin.optipng(),
-      imagemin.svgo(),
-      imageminPngquant(),
-      imageminJpegRecompress(),
-    ])).pipe(gulp.dest(`${DIST_PATH}/images`))
-));
-
 gulp.task('clean', () => (
   del.sync([DIST_PATH])
 ));
 
 // Default Task
-gulp.task('default', ['clean', 'images', 'styles', 'scripts']);
+gulp.task('default', ['clean', 'styles', 'scripts']);
 
 // Watch Files For Changes
 gulp.task('watch', ['default'], () => {
