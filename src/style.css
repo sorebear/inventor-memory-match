@@ -5,7 +5,7 @@
 }
 
 body {
-  background-image: url(images/my_gears.png);
+  background-image: url(http://res.cloudinary.com/sorebear/image/upload/c_scale,w_1000/v1520717917/inventory-memory-match/my_gears.png);
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -49,13 +49,22 @@ body {
   color: white;
   margin: 50px 0 10px 0;
   font-size: 32px;
-  transition: 0.3s;
+  transition: 0.5s;
+  display: inline-block;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: scale(1);
 }
 
 .message_prompt > h2.highlightAnimation {
   /* color: rgb(35, 171, 198); */
   /* font-size: 32.5px; */
-  text-shadow: 0px 7px 5px rgb(35, 171, 198);
+  /* text-shadow: 0px 2px 2px rgb(35, 171, 198); */
+  transform: scale(1.05);
   /* text-shadow: 0px 10px 5px white; */
 }
 
@@ -125,6 +134,12 @@ body {
   width: 150px;
   cursor: pointer;
   margin: 0 -10px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .deg-0 {
@@ -175,7 +190,13 @@ body {
   left: 0;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
 @media screen and (max-width: 1180px) {
+  
+
   .stat-bar,
   .instruction-bar {
     float: none;
@@ -239,6 +260,10 @@ body {
     margin: 6px -7px;
   }
 
+  .message_prompt > h2 {
+    font-size: 28px;
+  }
+
   .instruction-bar,
   .stat-bar {
     width: 100%;
@@ -254,5 +279,9 @@ body {
     height: 18vw;
     width: 18vw;
     margin: 10px -4px;
+  }
+
+  .message_prompt > h2 {
+    font-size: 18px;
   }
 }
