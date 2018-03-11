@@ -1,314 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Inventor Memory Match</title>
-    <link href="https://fonts.googleapis.com/css?family=Trade+Winds" rel="stylesheet">
-    <link href="dist/style.css" rel="stylesheet" type="text/css">
-    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    <script src="dist/script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, 
+    height=device-height, 
+    user-scalable=no, 
+    initial-scale=1.0, 
+    maximum-scale=1.0, 
+    minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Inventor Memory Match</title>
+  <link href="https://fonts.googleapis.com/css?family=Trade+Winds" rel="stylesheet">
+  <link href="dist/style.css" rel="stylesheet" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script src="dist/script.js"></script>
 </head>
+
 <body>
-    <div class="header">
-        <img src="dist/images/game_title.png"/>
+  <div class="header">
+    <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_650/v1520717901/inventory-memory-match/game_title.png" alt="Inventor Memory Match Title"
+    />
+  </div>
+  <div class="game-area">
+    <div class="row-1">
+      <div class="card">
+        <div class="front">
+          <img id="hex0" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex1" src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex2" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex3" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
     </div>
-    <div class="game-area">
-        <div class="row-1">
-            <div class="card">
-                <div class="front">
-                    <img id="hex0" src="dist/images/pair1.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex1" src="dist/images/pair1.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex2" src="dist/images/pair2.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex3" src="dist/images/pair2.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
+    <div class="row-2">
+      <div class="card">
+        <div class="front">
+          <img id="hex4" class="hexagon deg-180" />
         </div>
-        <div class="row-2">
-            <div class="card">
-                <div class="front">
-                    <img id="hex4" src="dist/images/pair3.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex5" src="dist/images/pair3.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex6" src="dist/images/pair4.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex7" src="dist/images/pair4.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex8" src="dist/images/pair5.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
         </div>
-        <div class="row-3">
-            <div class="card">
-                <div class="front">
-                    <img id="hex9" src="dist/images/pair5.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex10" src="dist/images/pair6.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex11" src="dist/images/pair6.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex12" src="dist/images/pair7.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
         </div>
-        <div class="row-4">
-            <div class="card">
-                <div class="front">
-                    <img id="hex13" src="dist/images/pair7.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex14" src="dist/images/pair8.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex15" src="dist/images/pair8.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-                <div class="no-rotate-button">
-                    <img src="dist/images/no_rotate.png" alt="no_rotate"/>
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex16" src="dist/images/pair9.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img id="hex17" src="dist/images/pair9.png" class="hexagon deg-180"/>
-                </div>
-                <div class="back">
-                    <img src="dist/images/card-back.png" class="hexagon deg-180"/>
-                </div>
-                <div class="clockwise-icon">
-                    <img src="dist/images/clock.png">
-                </div>
-                <div class="counterclockwise-icon">
-                    <img src="dist/images/counterclock.png">
-                </div>
-            </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
         </div>
-        <div class="message_prompt">
-            <h2>-Choose A Hex To Reveal-</h2>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex5" class="hexagon deg-180" />
         </div>
-        <div class="information">
-            <div class="instruction-bar">
-                <h2>Instructions</h2>
-                <p>1. Match All 9 Pairs Of Inventors</p>
-                <p>2. You Must Match BOTH Images and Hex Orientation</p>
-                <p>3. After a successful match, you can rotate any one hex</p>
-                <p>4. On an unsuccessful match, the first hex selected will rotate clockwise;<br>
-                The second hex selected will rotate counterclockwise</p>
-            </div>
-            <div class="stat-bar">
-                <h2>Stats</h2>
-                <div>
-                    <p>Matches:</p>
-                    <p class="display_matches">0</p>
-                </div>
-                <div>
-                    <p>Guesses:</p>
-                    <p class="display_guesses">0</p>
-                </div>
-                <div>
-                    <p>Accuracy:</p>
-                    <p class="display_accuracy">--</p>
-                </div>
-                <div id="games-played">
-                    <p>Games Played:</p>
-                    <p class="display_games_played">0</p>
-                </div>
-                <button>Reset Game</button>
-            </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
         </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex6" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex7" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex8" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
     </div>
+    <div class="row-3">
+      <div class="card">
+        <div class="front">
+          <img id="hex9" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex10" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex11" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex12" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+    </div>
+    <div class="row-4">
+      <div class="card">
+        <div class="front">
+          <img id="hex13" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex14" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex15" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+        <div class="no-rotate-button">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717896/inventory-memory-match/no_rotate.png" alt="no rotate" />
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex16" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+      <div class="card">
+        <div class="front">
+          <img id="hex17" class="hexagon deg-180" />
+        </div>
+        <div class="back">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_150/v1520717895/inventory-memory-match/card-back.png" class="hexagon deg-180" />
+        </div>
+        <div class="clockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/clock.png">
+        </div>
+        <div class="counterclockwise-icon">
+          <img src="http://res.cloudinary.com/sorebear/image/upload/c_scale,w_50/v1520717895/inventory-memory-match/counterclock.png">
+        </div>
+      </div>
+    </div>
+    <div class="message_prompt">
+      <h2>-Choose A Hex To Reveal-</h2>
+    </div>
+    <div class="information">
+      <div class="instruction-bar">
+        <h2>Instructions</h2>
+        <p>1. Match All 9 Pairs Of Inventors</p>
+        <p>2. You Must Match BOTH Images and Hex Orientation</p>
+        <p>3. After a successful match, you can rotate any one hex</p>
+        <p>4. On an unsuccessful match, the first hex selected will rotate clockwise;
+          <br> The second hex selected will rotate counterclockwise</p>
+      </div>
+      <div class="stat-bar">
+        <h2>Stats</h2>
+        <div class="stats-container">
+          <div>
+            <p>Matches:</p>
+            <p class="display_matches">0</p>
+          </div>
+          <div>
+            <p>Guesses:</p>
+            <p class="display_guesses">0</p>
+          </div>
+          <div>
+            <p>Accuracy:</p>
+            <p class="display_accuracy">--</p>
+          </div>
+          <div id="games-played">
+            <p>Games Played:</p>
+            <p class="display_games_played">0</p>
+          </div>
+        </div>
+        <button>Reset Game</button>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
