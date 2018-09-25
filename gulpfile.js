@@ -22,6 +22,12 @@ gulp.task('styles', () => (
     .pipe(gulp.dest(DIST_PATH))
 ));
 
+gulp.task('index', () => (
+  gulp
+    .src('src/index.html')
+    .pipe(gulp.dest(DIST_PATH))
+));
+
 // Scripts
 gulp.task('scripts', () => (
   gulp
@@ -40,7 +46,7 @@ gulp.task('clean', () => (
 ));
 
 // Default Task
-gulp.task('default', ['clean', 'styles', 'scripts']);
+gulp.task('default', ['clean', 'styles', 'index', 'scripts']);
 
 // Watch Files For Changes
 gulp.task('watch', ['default'], () => {
